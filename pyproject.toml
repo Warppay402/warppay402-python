@@ -1,3 +1,23 @@
 [build-system]
 requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
+
+[project]
+name = "warppay402-mcp"
+version = "1.1.1"
+description = "Keyless, zero-API LangChain & CrewAI tool suite for WarpPay402 x402 micropayment infrastructure across Base, Solana, Arbitrum, and Arc Mainnet."
+keywords = [
+    "keyless",
+    "zero-api",
+    "x402",
+    "micropayments",
+    "langchain",
+    "crewai",
+    "mcp",
+    "base-chain",
+    "solana",
+    "arbitrum",
+    "arc-mainnet",
+    "ai-agents",
+    "crypto-payments"
+]
