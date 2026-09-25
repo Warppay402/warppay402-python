@@ -53,6 +53,13 @@ The package currently includes these tools:
 | `ArcCctpBridgeTool` | Cross-chain USDC bridge via CCTP | `run(amountUsdc, destinationChain, recipientAddress)` |
 | `PublicDataFeedTool` | Signed public data feed retrieval | `run(filename)` |
 | `DataFeedsTool` | Market / yield feed retrieval | `run(feedId)` |
+| `RealEstateCalculatorTool` | Real estate Cap Rate, NOI, and DSCR calculator | `run(purchasePrice, monthlyRent)` |
+| `AddressNormalizerTool` | Address geocoding & lat/lon resolution | `run(address)` |
+| `WeatherOracleTool` | Atmospheric weather & drone flight safety oracle | `run(latitude, longitude)` |
+| `ForexOracleTool` | Global foreign exchange fiat spot rates | `run(baseCurrency="USD")` |
+| `ShippingRateEstimatorTool` | Domestic USPS parcel shipping rate estimator | `run(weightLbs, originZip, destinationZip)` |
+| `GithubHealthAnalyzerTool` | GitHub repository stars, issues & license inspector | `run(repository)` |
+| `PropertyCompsEstimatorTool` | Property valuations & tax assessor comps | `run(squareFeet, bedrooms, zipCode)` |
 
 This table is meant to make it easy for developers to point agents at the right server capability and to understand the expected inputs before invoking a tool.
 

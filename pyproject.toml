@@ -4,26 +4,60 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "warppay402-mcp"
-version = "1.1.1"
+version = "1.2.1"
 description = "Keyless, zero-API LangChain & CrewAI tool suite for WarpPay402 x402 micropayment infrastructure across Base, Solana, Arbitrum, and Arc Mainnet."
 readme = "README.md"
 license = "MIT"
+requires-python = ">=3.9"
+dependencies = [
+    "requests>=2.28.0",
+    "langchain-core>=0.1.0",
+    "mcp>=1.0.0",
+]
 classifiers = [
     "Programming Language :: Python :: 3",
 ]
-dynamic = ["dependencies"]
 keywords = [
+    # --- Protocol & Integration Core ---
+    "mcp",
+    "model-context-protocol",
+    "x402",
     "keyless",
     "zero-api",
-    "x402",
     "micropayments",
+    "pay-per-use",
+    "autonomous-payments",
+
+    # --- Frameworks & Orchestration ---
     "langchain",
     "crewai",
-    "mcp",
+    "ai-agents",
+    "agentic-workflow",
+    "llm-tools",
+
+    # --- Web3, Multichain & Smart Contracts ---
+    "crypto-payments",
     "base-chain",
     "solana",
     "arbitrum",
     "arc-mainnet",
-    "ai-agents",
-    "crypto-payments"
+    "usdc",
+    "cctp",
+    "cross-chain-bridge",
+    "aerodrome",
+    "clamm",
+    "smart-contracts",
+
+    # --- Real-World Utilities & Micro-Oracles ---
+    "web-scraping",
+    "pdf-parser",
+    "geocoding",
+    "weather-oracle",
+    "forex-rates",
+    "real-estate-calculator",
+    "shipping-estimator",
+    "github-analyzer"
 ]
+
+[project.scripts]
+warppay402-mcp = "warppay402_mcp.cli:main"

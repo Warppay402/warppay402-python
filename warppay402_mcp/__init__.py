@@ -1,3 +1,5 @@
+__version__ = "1.2.0"
+
 from .tools import (
     ArcDexOracleTool,
     WebScraperTool,
@@ -19,6 +21,13 @@ from .tools import (
     ArcCctpBridgeTool,
     PublicDataFeedTool,
     DataFeedsTool,
+    RealEstateCalculatorTool,
+    AddressNormalizerTool,
+    WeatherOracleTool,
+    ForexOracleTool,
+    ShippingRateEstimatorTool,
+    GithubHealthAnalyzerTool,
+    PropertyCompsEstimatorTool,
 )
 
 __all__ = [
@@ -42,4 +51,11 @@ __all__ = [
     "ArcCctpBridgeTool",
     "PublicDataFeedTool",
     "DataFeedsTool",
+    "RealEstateCalculatorTool",
+    "AddressNormalizerTool",
+    "WeatherOracleTool",
+    "ForexOracleTool",
+    "ShippingRateEstimatorTool",
+    "GithubHealthAnalyzerTool",
+    "PropertyCompsEstimatorTool",
 ]

@@ -186,3 +186,71 @@ class DataFeedsTool(BaseTool):
     def _run(self, feedId: str) -> str:
         res = requests.get(f"https://api.warppay402.com/api/v1/feeds/{feedId}")
         return res.text
+
+class RealEstateCalculatorTool(BaseTool):
+    name: str = "real_estate_calculator"
+    description: str = "Calculates NOI, Cap Rate, Monthly Cash Flow, and DSCR for real estate deals ($0.0005 USDC)."
+
+    def _run(self, purchasePrice: float, monthlyRent: float, annualTaxes: Optional[float] = None,
+             annualInsurance: Optional[float] = None, interestRate: float = 6.5, downPaymentPct: float = 20.0) -> str:
+        payload = {
+            "purchasePrice": purchasePrice,
+            "monthlyRent": monthlyRent,
+            "annualTaxes": annualTaxes,
+            "annualInsurance": annualInsurance,
+            "interestRate": interestRate,
+            "downPaymentPct": downPaymentPct,
+        }
+        res = requests.post(f"{BASE_URL}/real-estate-calculator", json=payload)
+        return res.text
+
+class AddressNormalizerTool(BaseTool):
+    name: str = "address_normalizer"
+    description: str = "Standardizes informal address queries and resolves lat/lon coordinates ($0.001 USDC)."
+
+    def _run(self, address: str) -> str:
+        res = requests.post(f"{BASE_URL}/address-normalizer", json={"address": address})
+        return res.text
+
+class WeatherOracleTool(BaseTool):
+    name: str = "weather_oracle"
+    description: str = "Fetches live atmospheric conditions, wind speed, visibility, and flight safety clearances ($0.001 USDC)."
+
+    def _run(self, latitude: float, longitude: float) -> str:
+        payload = {"latitude": latitude, "longitude": longitude}
+        res = requests.post(f"{BASE_URL}/weather-oracle", json=payload)
+        return res.text
+
+class ForexOracleTool(BaseTool):
+    name: str = "forex_oracle"
+    description: str = "Resolves real-time global foreign exchange fiat rates ($0.0005 USDC)."
+
+    def _run(self, baseCurrency: str = "USD") -> str:
+        res = requests.post(f"{BASE_URL}/forex-oracle", json={"baseCurrency": baseCurrency})
+        return res.text
+
+class ShippingRateEstimatorTool(BaseTool):
+    name: str = "shipping_rate_estimator"
+    description: str = "Calculates ground, priority, and express shipping rates for e-commerce ($0.001 USDC)."
+
+    def _run(self, weightLbs: float, originZip: str, destinationZip: str) -> str:
+        payload = {"weightLbs": weightLbs, "originZip": originZip, "destinationZip": destinationZip}
+        res = requests.post(f"{BASE_URL}/shipping-rate-estimator", json=payload)
+        return res.text
+
+class GithubHealthAnalyzerTool(BaseTool):
+    name: str = "github_health_analyzer"
+    description: str = "Queries public GitHub repo stars, open issues, licenses, and push activity ($0.002 USDC)."
+
+    def _run(self, repository: str) -> str:
+        res = requests.post(f"{BASE_URL}/github-health-analyzer", json={"repository": repository})
+        return res.text
+
+class PropertyCompsEstimatorTool(BaseTool):
+    name: str = "property_comps_estimator"
+    description: str = "Generates market valuations, price-per-sqft comps, and annual tax estimates ($0.005 USDC)."
+
+    def _run(self, squareFeet: float, bedrooms: int, zipCode: str) -> str:
+        payload = {"squareFeet": squareFeet, "bedrooms": bedrooms, "zipCode": zipCode}
+        res = requests.post(f"{BASE_URL}/property-comps-estimator", json=payload)
+        return res.text
