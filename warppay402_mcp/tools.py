@@ -254,3 +254,12 @@ class PropertyCompsEstimatorTool(BaseTool):
         payload = {"squareFeet": squareFeet, "bedrooms": bedrooms, "zipCode": zipCode}
         res = requests.post(f"{BASE_URL}/property-comps-estimator", json=payload)
         return res.text
+
+class OutageOracleTool(BaseTool):
+    name: str = "outage_oracle"
+    description: str = "Resolves real-time power grid, ISP broadband, and cellular network outages by ZIP code ($0.002 USDC)."
+
+    def _run(self, zipCode: str, state: Optional[str] = None, serviceType: str = "all") -> str:
+        payload = {"zipCode": zipCode, "state": state, "serviceType": serviceType}
+        res = requests.post(f"{BASE_URL}/outage-oracle", json=payload)
+        return res.text

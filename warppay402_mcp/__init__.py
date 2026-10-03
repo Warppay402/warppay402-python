@@ -1,4 +1,4 @@
-__version__ = "1.2.0"
+__version__ = "1.2.2"
 
 from .tools import (
     ArcDexOracleTool,
@@ -24,6 +24,7 @@ from .tools import (
     RealEstateCalculatorTool,
     AddressNormalizerTool,
     WeatherOracleTool,
+    OutageOracleTool,
     ForexOracleTool,
     ShippingRateEstimatorTool,
     GithubHealthAnalyzerTool,
@@ -54,6 +55,7 @@ __all__ = [
     "RealEstateCalculatorTool",
     "AddressNormalizerTool",
     "WeatherOracleTool",
+    "OutageOracleTool",
     "ForexOracleTool",
     "ShippingRateEstimatorTool",
     "GithubHealthAnalyzerTool",

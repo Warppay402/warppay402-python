@@ -25,6 +25,7 @@ from warppay402_mcp.tools import (
     RealEstateCalculatorTool,
     AddressNormalizerTool,
     WeatherOracleTool,
+    OutageOracleTool,
     ForexOracleTool,
     ShippingRateEstimatorTool,
     GithubHealthAnalyzerTool,
@@ -41,8 +42,8 @@ tools = [
     ExtractJsonTool(), SmartContractVerifierTool(), AerodromeYieldsTool(), AerodromeSwapTool(),
     AerodromeClammTool(), AerodromeVeaeroTool(), DeployBaseContractTool(), DeploySolanaContractTool(),
     DeployArcContractTool(), ArcCctpBridgeTool(), PublicDataFeedTool(), DataFeedsTool(),
-    RealEstateCalculatorTool(), AddressNormalizerTool(), WeatherOracleTool(), ForexOracleTool(),
-    ShippingRateEstimatorTool(), GithubHealthAnalyzerTool(), PropertyCompsEstimatorTool()
+    RealEstateCalculatorTool(), AddressNormalizerTool(), WeatherOracleTool(), OutageOracleTool(),
+    ForexOracleTool(), ShippingRateEstimatorTool(), GithubHealthAnalyzerTool(), PropertyCompsEstimatorTool()
 ]
 
 def register_tool(tool_instance):
