@@ -1,5 +1,7 @@
 # warppay402-mcp
 
+[![M8ven Score](https://m8ven.ai/badge/mcp/warppay402-warppay402-python-1g5nyh)](https://m8ven.ai/mcp/warppay402-warppay402-python-1g5nyh?s=readme)
+
 LangChain-compatible `BaseTool` wrappers for WarpPay402 x402 micropayment APIs.
 
 ## Overview
