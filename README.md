@@ -19,14 +19,19 @@ The WarpPay402 server accepts the following payment methods for tool usage:
 
 ## Installation
 
+Install the base package:
+
 ```bash
 pip install warppay402-mcp
 ```
 
-If you want to run the LangChain/OpenAI example below, install the optional integration package:
+This includes the required runtime dependencies (`requests`, `langchain-core`, and `mcp`).
+
+If you want to run the LangChain/OpenAI or LlamaIndex examples below, install the optional integration packages:
 
 ```bash
 pip install langchain-openai
+pip install "warppay402-mcp[llamaindex]" llama-index-llms-openai
 ```
 
 ## Available tools
@@ -63,6 +68,7 @@ The package currently includes these tools:
 | `GithubHealthAnalyzerTool` | $0.002 USDC | GitHub repository stars, issues & license inspector | `run(repository)` |
 | `PropertyCompsEstimatorTool` | $0.005 USDC | Property valuations & tax assessor comps | `run(squareFeet, bedrooms, zipCode)` |
 | `OutageOracleTool` | $0.002 USDC | Real-time power, ISP, and cellular outage oracle | `run(zipCode, state=None, serviceType="all")` |
+| `UcpDealsOracleTool` | $0.001 USDC | UCP merchant product catalog & deals oracle | `run(query, maxPriceUSD=None, inStockOnly=True)` |
 
 This table is meant to make it easy for developers to point agents at the right server capability and understand the expected inputs and pricing before invoking a tool.
 
@@ -131,9 +137,34 @@ tool = AerodromeYieldsTool()
 print(tool.run())
 ```
 
+### LlamaIndex agent usage
+
+First, install LlamaIndex support:
+
+```bash
+pip install "warppay402-mcp[llamaindex]" llama-index-llms-openai
+```
+
+Then pass the converted tools directly into any LlamaIndex agent:
+
+```python
+from llama_index.core.agent import ReActAgent
+from llama_index.llms.openai import OpenAI
+from warppay402_mcp import WarpPayLlamaIndexTools
+
+# Retrieve all 29 tools wrapped as LlamaIndex FunctionTools
+tools = WarpPayLlamaIndexTools.get_tools()
+
+# Attach tools to a LlamaIndex Agent
+agent = ReActAgent.from_tools(tools, llm=OpenAI(model="gpt-4o-mini"), verbose=True)
+
+response = agent.chat("What is the current ETH/USDC spot price on Arc Mainnet?")
+print(response)
+```
+
 ## Notes
 
 - The package exports `ArcDexOracleTool` at the package root, but the full tool set is defined in `warppay402_mcp.tools`.
 - Many tools accept simple Python arguments and return raw API response text as a string.
-- This project depends on `requests` and `langchain-core` as configured in the package metadata.
+- This project depends on `requests`, `langchain-core`, and `mcp` as configured in the package metadata.
 - `langchain-openai` is required only for the `ChatOpenAI` example.

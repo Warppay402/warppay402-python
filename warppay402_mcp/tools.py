@@ -2,14 +2,14 @@ import requests
 from typing import Optional, Dict, Any
 from langchain_core.tools import BaseTool
 
-BASE_URL = "https://api.warppay402.com/api/v1/tools"
+BASE_URL = "https://api.warppay402.com/api/v1"
 
 class ArcDexOracleTool(BaseTool):
     name: str = "arc_dex_oracle"
     description: str = "Real-time ETH/USDC spot price resolver and DEX liquidity oracle for Arc Mainnet ($0.001 USDC)."
 
     def _run(self, pair: str = "ETH/USDC") -> str:
-        res = requests.post(f"{BASE_URL}/arc-dex-oracle", json={"pair": pair})
+        res = requests.post(f"{BASE_URL}/tools/arc-dex-oracle", json={"pair": pair})
         return res.text
 
 class WebScraperTool(BaseTool):
@@ -17,7 +17,7 @@ class WebScraperTool(BaseTool):
     description: str = "Scrapes any public webpage URL into clean Markdown for AI context window ingestion ($0.001 USDC)."
 
     def _run(self, url: str) -> str:
-        res = requests.post(f"{BASE_URL}/web-scraper", json={"url": url})
+        res = requests.post(f"{BASE_URL}/tools/web-scraper", json={"url": url})
         return res.text
 
 class BrowserScraperTool(BaseTool):
@@ -25,7 +25,7 @@ class BrowserScraperTool(BaseTool):
     description: str = "Executes unblockable JavaScript Chromium rendering via proxy workers ($0.005 USDC)."
 
     def _run(self, url: str) -> str:
-        res = requests.post(f"{BASE_URL}/browser-scraper", json={"url": url})
+        res = requests.post(f"{BASE_URL}/tools/browser-scraper", json={"url": url})
         return res.text
 
 class BaseAnalyticsTool(BaseTool):
@@ -33,7 +33,7 @@ class BaseAnalyticsTool(BaseTool):
     description: str = "Fetches ETH balance, nonce, and account stats for any 0x wallet on Base Mainnet ($0.002 USDC)."
 
     def _run(self, address: str) -> str:
-        res = requests.post(f"{BASE_URL}/base-analytics", json={"address": address})
+        res = requests.post(f"{BASE_URL}/tools/base-analytics", json={"address": address})
         return res.text
 
 class ArcAnalyticsTool(BaseTool):
@@ -41,7 +41,7 @@ class ArcAnalyticsTool(BaseTool):
     description: str = "Fetches live block height, gas price, and RPC latency from Arc Mainnet ($0.001 USDC)."
 
     def _run(self) -> str:
-        res = requests.post(f"{BASE_URL}/arc-analytics")
+        res = requests.post(f"{BASE_URL}/tools/arc-analytics")
         return res.text
 
 class ArcNetworkQueryTool(BaseTool):
@@ -50,7 +50,7 @@ class ArcNetworkQueryTool(BaseTool):
 
     def _run(self, includeGasTrends: bool = True, checkMerchantAccount: bool = True) -> str:
         payload = {"includeGasTrends": includeGasTrends, "checkMerchantAccount": checkMerchantAccount}
-        res = requests.post(f"{BASE_URL}/arc-network-query", json=payload)
+        res = requests.post(f"{BASE_URL}/tools/arc-network-query", json=payload)
         return res.text
 
 class PdfExtractorTool(BaseTool):
@@ -58,7 +58,7 @@ class PdfExtractorTool(BaseTool):
     description: str = "Downloads and extracts clean plain text preview from public PDF document URLs ($0.005 USDC)."
 
     def _run(self, pdfUrl: str) -> str:
-        res = requests.post(f"{BASE_URL}/pdf-extractor", json={"pdfUrl": pdfUrl})
+        res = requests.post(f"{BASE_URL}/tools/pdf-extractor", json={"pdfUrl": pdfUrl})
         return res.text
 
 class RenderScreenshotTool(BaseTool):
@@ -66,7 +66,7 @@ class RenderScreenshotTool(BaseTool):
     description: str = "Captures full-page rendered screenshot image data from target URL ($0.01 USDC)."
 
     def _run(self, url: str) -> str:
-        res = requests.post(f"{BASE_URL}/render-screenshot", json={"url": url})
+        res = requests.post(f"{BASE_URL}/tools/render-screenshot", json={"url": url})
         return res.text
 
 class ExtractJsonTool(BaseTool):
@@ -75,7 +75,7 @@ class ExtractJsonTool(BaseTool):
 
     def _run(self, url: str, schema: Optional[Dict[str, Any]] = None) -> str:
         payload = {"url": url, "schema": schema or {}}
-        res = requests.post(f"{BASE_URL}/extract-json", json=payload)
+        res = requests.post(f"{BASE_URL}/tools/extract-json", json=payload)
         return res.text
 
 class SmartContractVerifierTool(BaseTool):
@@ -83,7 +83,7 @@ class SmartContractVerifierTool(BaseTool):
     description: str = "Source code analysis, bytecode validation, ABI fetching, and proxy detection on Basescan ($0.02 USDC)."
 
     def _run(self, address: str) -> str:
-        res = requests.post(f"{BASE_URL}/smart-contract-verifier", json={"address": address})
+        res = requests.post(f"{BASE_URL}/tools/smart-contract-verifier", json={"address": address})
         return res.text
 
 class AerodromeYieldsTool(BaseTool):
@@ -91,7 +91,7 @@ class AerodromeYieldsTool(BaseTool):
     description: str = "Fetches top live Aerodrome DEX yield pools, APYs, and TVL on Base Mainnet ($0.003 USDC)."
 
     def _run(self) -> str:
-        res = requests.get(f"{BASE_URL}/aerodrome-yields")
+        res = requests.get(f"{BASE_URL}/tools/aerodrome-yields")
         return res.text
 
 class AerodromeSwapTool(BaseTool):
@@ -103,7 +103,7 @@ class AerodromeSwapTool(BaseTool):
             "tokenIn": tokenIn, "tokenOut": tokenOut,
             "amountIn": amountIn, "decimalsIn": decimalsIn, "isStable": isStable
         }
-        res = requests.post(f"{BASE_URL}/aerodrome-swap", json=payload)
+        res = requests.post(f"{BASE_URL}/tools/aerodrome-swap", json=payload)
         return res.text
 
 class AerodromeClammTool(BaseTool):
@@ -119,7 +119,7 @@ class AerodromeClammTool(BaseTool):
             "tickLower": tickLower, "tickUpper": tickUpper,
             "amount0Desired": amount0Desired, "amount1Desired": amount1Desired, "tokenId": tokenId
         }
-        res = requests.post(f"{BASE_URL}/aerodrome-clamm", json=payload)
+        res = requests.post(f"{BASE_URL}/tools/aerodrome-clamm", json=payload)
         return res.text
 
 class AerodromeVeaeroTool(BaseTool):
@@ -132,7 +132,7 @@ class AerodromeVeaeroTool(BaseTool):
             "action": action, "amount": amount, "lockDurationWeeks": lockDurationWeeks,
             "tokenId": tokenId, "poolVoteAddresses": poolVoteAddresses
         }
-        res = requests.post(f"{BASE_URL}/aerodrome-veaero", json=payload)
+        res = requests.post(f"{BASE_URL}/tools/aerodrome-veaero", json=payload)
         return res.text
 
 class DeployBaseContractTool(BaseTool):
@@ -140,7 +140,7 @@ class DeployBaseContractTool(BaseTool):
     description: str = "Programmatically deploys custom Escrow, Bounty, or Subscription contracts to Base Mainnet ($5.00 USDC)."
 
     def _run(self, contractType: str = "escrow") -> str:
-        res = requests.post(f"{BASE_URL}/deploy-contract", json={"contractType": contractType})
+        res = requests.post(f"{BASE_URL}/tools/deploy-contract", json={"contractType": contractType})
         return res.text
 
 class DeploySolanaContractTool(BaseTool):
@@ -149,7 +149,7 @@ class DeploySolanaContractTool(BaseTool):
 
     def _run(self, contractType: str, params: Dict[str, Any]) -> str:
         payload = {"contractType": contractType, "params": params}
-        res = requests.post(f"{BASE_URL}/deploy-solana-contract", json=payload)
+        res = requests.post(f"{BASE_URL}/tools/deploy-solana-contract", json=payload)
         return res.text
 
 class DeployArcContractTool(BaseTool):
@@ -157,7 +157,7 @@ class DeployArcContractTool(BaseTool):
     description: str = "Programmatically deploys custom Escrow, Bounty, or Agent contracts directly to Arc Mainnet ($5.00 USDC)."
 
     def _run(self, contractType: str = "escrow") -> str:
-        res = requests.post(f"{BASE_URL}/deploy-arc-contract", json={"contractType": contractType})
+        res = requests.post(f"{BASE_URL}/tools/deploy-arc-contract", json={"contractType": contractType})
         return res.text
 
 class ArcCctpBridgeTool(BaseTool):
@@ -168,7 +168,7 @@ class ArcCctpBridgeTool(BaseTool):
         payload = {
             "amountUsdc": amountUsdc, "destinationChain": destinationChain, "recipientAddress": recipientAddress
         }
-        res = requests.post(f"{BASE_URL}/arc-cctp-bridge", json=payload)
+        res = requests.post(f"{BASE_URL}/tools/arc-cctp-bridge", json=payload)
         return res.text
 
 class PublicDataFeedTool(BaseTool):
@@ -184,7 +184,7 @@ class DataFeedsTool(BaseTool):
     description: str = "Fetches pre-scraped market data feeds and yield reports ($0.001 USDC)."
 
     def _run(self, feedId: str) -> str:
-        res = requests.get(f"https://api.warppay402.com/api/v1/feeds/{feedId}")
+        res = requests.get(f"{BASE_URL}/feeds/{feedId}")
         return res.text
 
 class RealEstateCalculatorTool(BaseTool):
@@ -201,7 +201,7 @@ class RealEstateCalculatorTool(BaseTool):
             "interestRate": interestRate,
             "downPaymentPct": downPaymentPct,
         }
-        res = requests.post(f"{BASE_URL}/real-estate-calculator", json=payload)
+        res = requests.post(f"{BASE_URL}/tools/real-estate-calculator", json=payload)
         return res.text
 
 class AddressNormalizerTool(BaseTool):
@@ -209,7 +209,7 @@ class AddressNormalizerTool(BaseTool):
     description: str = "Standardizes informal address queries and resolves lat/lon coordinates ($0.001 USDC)."
 
     def _run(self, address: str) -> str:
-        res = requests.post(f"{BASE_URL}/address-normalizer", json={"address": address})
+        res = requests.post(f"{BASE_URL}/tools/address-normalizer", json={"address": address})
         return res.text
 
 class WeatherOracleTool(BaseTool):
@@ -218,7 +218,7 @@ class WeatherOracleTool(BaseTool):
 
     def _run(self, latitude: float, longitude: float) -> str:
         payload = {"latitude": latitude, "longitude": longitude}
-        res = requests.post(f"{BASE_URL}/weather-oracle", json=payload)
+        res = requests.post(f"{BASE_URL}/tools/weather-oracle", json=payload)
         return res.text
 
 class ForexOracleTool(BaseTool):
@@ -226,7 +226,7 @@ class ForexOracleTool(BaseTool):
     description: str = "Resolves real-time global foreign exchange fiat rates ($0.0005 USDC)."
 
     def _run(self, baseCurrency: str = "USD") -> str:
-        res = requests.post(f"{BASE_URL}/forex-oracle", json={"baseCurrency": baseCurrency})
+        res = requests.post(f"{BASE_URL}/tools/forex-oracle", json={"baseCurrency": baseCurrency})
         return res.text
 
 class ShippingRateEstimatorTool(BaseTool):
@@ -235,7 +235,7 @@ class ShippingRateEstimatorTool(BaseTool):
 
     def _run(self, weightLbs: float, originZip: str, destinationZip: str) -> str:
         payload = {"weightLbs": weightLbs, "originZip": originZip, "destinationZip": destinationZip}
-        res = requests.post(f"{BASE_URL}/shipping-rate-estimator", json=payload)
+        res = requests.post(f"{BASE_URL}/tools/shipping-rate-estimator", json=payload)
         return res.text
 
 class GithubHealthAnalyzerTool(BaseTool):
@@ -243,7 +243,7 @@ class GithubHealthAnalyzerTool(BaseTool):
     description: str = "Queries public GitHub repo stars, open issues, licenses, and push activity ($0.002 USDC)."
 
     def _run(self, repository: str) -> str:
-        res = requests.post(f"{BASE_URL}/github-health-analyzer", json={"repository": repository})
+        res = requests.post(f"{BASE_URL}/tools/github-health-analyzer", json={"repository": repository})
         return res.text
 
 class PropertyCompsEstimatorTool(BaseTool):
@@ -252,7 +252,7 @@ class PropertyCompsEstimatorTool(BaseTool):
 
     def _run(self, squareFeet: float, bedrooms: int, zipCode: str) -> str:
         payload = {"squareFeet": squareFeet, "bedrooms": bedrooms, "zipCode": zipCode}
-        res = requests.post(f"{BASE_URL}/property-comps-estimator", json=payload)
+        res = requests.post(f"{BASE_URL}/tools/property-comps-estimator", json=payload)
         return res.text
 
 class OutageOracleTool(BaseTool):
@@ -261,5 +261,14 @@ class OutageOracleTool(BaseTool):
 
     def _run(self, zipCode: str, state: Optional[str] = None, serviceType: str = "all") -> str:
         payload = {"zipCode": zipCode, "state": state, "serviceType": serviceType}
-        res = requests.post(f"{BASE_URL}/outage-oracle", json=payload)
+        res = requests.post(f"{BASE_URL}/tools/outage-oracle", json=payload)
+        return res.text
+
+class UcpDealsOracleTool(BaseTool):
+    name: str = "ucp_deals_oracle"
+    description: str = "Aggregates UCP merchant catalogs, pricing, stock availability, and instant checkout URLs ($0.001 USDC)."
+
+    def _run(self, query: str, maxPriceUSD: Optional[float] = None, inStockOnly: bool = True) -> str:
+        payload = {"query": query, "maxPriceUSD": maxPriceUSD, "inStockOnly": inStockOnly}
+        res = requests.post(f"{BASE_URL}/ucp/search", json=payload)
         return res.text

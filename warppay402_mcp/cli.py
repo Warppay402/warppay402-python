@@ -30,12 +30,13 @@ from warppay402_mcp.tools import (
     ShippingRateEstimatorTool,
     GithubHealthAnalyzerTool,
     PropertyCompsEstimatorTool,
+    UcpDealsOracleTool,
 )
 
 # Initialize MCPServer (mcp 2.x)
 mcp = MCPServer("WarpPay402 MCP Gateway")
 
-# Instantiate all 28 tools
+# Instantiate all 29 tools
 tools = [
     ArcDexOracleTool(), WebScraperTool(), BrowserScraperTool(), BaseAnalyticsTool(),
     ArcAnalyticsTool(), ArcNetworkQueryTool(), PdfExtractorTool(), RenderScreenshotTool(),
@@ -43,7 +44,8 @@ tools = [
     AerodromeClammTool(), AerodromeVeaeroTool(), DeployBaseContractTool(), DeploySolanaContractTool(),
     DeployArcContractTool(), ArcCctpBridgeTool(), PublicDataFeedTool(), DataFeedsTool(),
     RealEstateCalculatorTool(), AddressNormalizerTool(), WeatherOracleTool(), OutageOracleTool(),
-    ForexOracleTool(), ShippingRateEstimatorTool(), GithubHealthAnalyzerTool(), PropertyCompsEstimatorTool()
+    ForexOracleTool(), ShippingRateEstimatorTool(), GithubHealthAnalyzerTool(), PropertyCompsEstimatorTool(),
+    UcpDealsOracleTool()
 ]
 
 def register_tool(tool_instance):

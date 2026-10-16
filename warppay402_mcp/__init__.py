@@ -1,4 +1,4 @@
-__version__ = "1.2.2"
+__version__ = "1.2.6"
 
 from .tools import (
     ArcDexOracleTool,
@@ -29,7 +29,14 @@ from .tools import (
     ShippingRateEstimatorTool,
     GithubHealthAnalyzerTool,
     PropertyCompsEstimatorTool,
+    UcpDealsOracleTool,
 )
+
+# Optional import for LlamaIndex support
+try:
+    from .llamaindex import WarpPayLlamaIndexTools
+except ImportError:
+    WarpPayLlamaIndexTools = None  # Fallback if llama-index-core is not installed
 
 __all__ = [
     "ArcDexOracleTool",
@@ -60,4 +67,6 @@ __all__ = [
     "ShippingRateEstimatorTool",
     "GithubHealthAnalyzerTool",
     "PropertyCompsEstimatorTool",
+    "UcpDealsOracleTool",
+    "WarpPayLlamaIndexTools",
 ]
